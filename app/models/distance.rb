@@ -1,23 +1,24 @@
+# Class to register locations and their gap
 class Distance < ApplicationRecord
-  before_save :verify_persistence
+  before_save :update_gap
 
-  attr_reader :params
+  validates_presence_of :origin, :destination, :gap
+  validates_inclusion_of :origin, :destination, in: ('A'..'Z'), message: ''
+  validates_length_of :origin, :destination, maximum: 1
+  validates :gap, inclusion: { in: 0..100_000,
+                               message: I18n.t('distance.errors.gap') }
 
-  validates_presence_of :origin, :destinatarie, :distance
-  validates :distance, inclusion: { in: 0..100_000,
-                                    message: I18n.t('distance.errors.distance') }
+  def self.find_or_initialize_by(params)
+    @@distance_attr = DistanceSanitizeService.call(params)
+    origin = @@distance_attr['origin']
+    destination = @@distance_attr['destination']
 
-  def find_or_initialize_by(params)
-    find_by(params.delete("distance")) || new(params)
+    find_by(origin: origin, destination: destination) || new(@@distance_attr)
   end
 
   private
 
-  def find(params)
-    Distance.where(origin: params.first).and(destinatarie: destinatarie)
-  end
-
-  def verify_persistence
-    self['distance'] = params['distance'] if self.persisted?
+  def update_gap
+    self.gap = @@distance_attr['gap'] if persisted?
   end
 end
