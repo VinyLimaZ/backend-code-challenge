@@ -1,25 +1,27 @@
 class DistanceController < ApplicationController
   def create
-    distance = Distance.find_or_initialize(distance_params)
+    distance = Distance.find_or_initialize_by(distance_params)
 
-    respond_to do |format|
-      if distance.save
-        format.json { render json: { status: 200, message: message.to_s } }
-      else
-        format.json { render json: { status: 500, message: distance.errors.full_messages.to_s } }
-      end
+    if distance.save
+      render json: { status: :ok, message: success_message(distance) }
+    else
+      render json: { status: :unprocessable_entity, message: error_message(distance) }
     end
   end
 
   private
 
-  def message
+  def success_message(distance)
+    status = distance.created_at == distance.updated_at ? 'created' : 'updated'
+    I18n.t("models.distance.messages.success.#{status}")
+  end
+
+  def error_message(distance)
     errors = distance.errors.full_messages
     return errors if errors.present?
-    "Distancia #{distance.status} com sucesso!"
   end
 
   def distance_params
-    params.require(:distance).permit(:origin, :destinatarie, :distance)
+    request.raw_post
   end
 end
