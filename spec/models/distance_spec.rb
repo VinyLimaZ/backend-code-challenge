@@ -2,12 +2,12 @@ describe Distance do
   context '::validates' do
     %w[origin destination].each do |attr|
       it { is_expected.to validate_presence_of(attr) }
-      # TODO arrumar essas verificaçoes que estão recebendo erro de outras
+      # TODO: arrumar essas verificaçoes que estão recebendo erro de outras
       # validações
       xit { is_expected.to validate_inclusion_of(attr).in_array(('a'..'z').to_a) }
       xit { is_expected.to validate_length_of(attr).is_equal_to(1) }
     end
-    xit { is_expected.to validates_presence_of('gap')}
+    xit { is_expected.to validates_presence_of('gap') }
     xit { is_expected.to validate_inclusion_of('gap').in_range(0..100_000) }
   end
 

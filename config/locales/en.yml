@@ -30,4 +30,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  models:
+    distance:
+      errors:
+        validatioon:
+          inclusion:
+            routes: 'out of pattern! Need to be one letter!'
+            gap: 'out of limit! Need to be more than 0 and less than 100,000'
+      messages:
+        success:
+          created: 'Route created with success!'
+          updated: 'Route updated with success!'
+    cost:
+      errors:
+        validation:
+          inclusion:
+            weight: 'need to be bettewen 0 and 50!'

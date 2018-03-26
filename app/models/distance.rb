@@ -3,11 +3,13 @@ class Distance < ApplicationRecord
   before_validation :update_gap
 
   validates_presence_of :origin, :destination, :gap
-  validates_inclusion_of :origin, :destination, in: ('A'..'Z'),
-    message: I18n.t('models.distance.attributes.errors.inclusion.routes')
+  validates_inclusion_of :origin, :destination,
+                         in: ('A'..'Z'),
+                         message: I18n.t('models.distance.attributes.errors.inclusion.routes')
   validates_length_of :origin, :destination, is: 1
-  validates_inclusion_of :gap, in: 0..100_000,
-    message: I18n.t('models.distance.attributes.errors.inclusion.gap')
+  validates_inclusion_of :gap,
+                         in: 0..100_000,
+                         message: I18n.t('models.distance.attributes.errors.inclusion.gap')
 
   def self.find_or_initialize_by(params)
     @@distance_attr = DistanceSanitizeService.call(params)
