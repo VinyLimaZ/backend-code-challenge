@@ -10,9 +10,7 @@ class Distance < ApplicationRecord
                          message: I18n.t('models.distance.errors.validation.inclusion.gap')
 
   def self.find_or_initialize_by(attrs)
-    origin = attrs['origin']
-    destination = attrs['destination']
-    gap = attrs['gap']
+    origin, destination, gap = attrs[:origin], attrs[:destination], attrs[:gap]
     distance_record = find_by(origin: origin, destination: destination)
 
     if distance_record.present?

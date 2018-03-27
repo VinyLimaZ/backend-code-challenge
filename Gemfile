@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'dijkstra', github: 'oscartanner/dijkstra.gem'
-gem 'mysql2', '~> 0.3.18'
+gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
