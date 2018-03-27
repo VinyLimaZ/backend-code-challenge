@@ -5,7 +5,7 @@ class DistanceController < ApplicationController
     if distance.save
       render json: { status: :ok, message: success_message(distance) }
     else
-      render json: { status: :unprocessable_entity, message: error_message(distance) }
+      render json: { status: :invalid, message: error_message(distance) }
     end
   end
 
@@ -17,11 +17,10 @@ class DistanceController < ApplicationController
   end
 
   def error_message(distance)
-    errors = distance.errors.full_messages
-    return errors if errors.present?
+    distance.errors.full_messages
   end
 
   def distance_params
-    request.raw_post
+    DistanceSanitizeService.call request.raw_post
   end
 end

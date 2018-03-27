@@ -1,7 +1,7 @@
 # Service to sanitize and organize the params received from request
 # The service do: Put all location letters in UPCASE
 # split the string e.g. ('x y 0') to create an array ['z', 'a', '0']
-# sort the ary to ['a', 'z', '0']
+# sort the ary to ['0', 'a', 'z']
 # after that, put the params with the keys to form a Hash
 class DistanceSanitizeService
   attr_reader :params
