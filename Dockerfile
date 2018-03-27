@@ -1,28 +1,15 @@
-FROM ruby:2.4.3-alpine
+FROM ruby:2.4.3-slim
 
-RUN apk update && apk upgrade && \
-    apk add --virtual build-dependencies build-base postgresql-dev \
-    libxml2-dev libxslt-dev tzdata curl wget bash git vim && \
-    apk add ruby-io-console ruby-bundler ruby-dev build-base $BUILD_PACKAGES && \
-    apk del build-dependencies
+RUN  apt-get update -y && apt-get install openssl libpq-dev \
+    build-essential postgresql libxml2-dev libxslt-dev tzdata curl \
+    wget bash git vim git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev -y
 
-RUN set -ex && apk add --no-cache libpq ca-certificates openssl
-
-RUN rm -rf /var/cache/apk/*
 
 RUN mkdir /app/
 WORKDIR /app/
 
 COPY Gemfile /app/
 COPY Gemfile.lock /app/
-RUN bundle install -j 20
+RUN bundle install
 
 COPY . .
-
-RUN set -ex \
-  && apk add --no-cache --virtual .app-builddeps nodejs=6.2.0-r0
-
-RUN chown -R nobody:nogroup .
-USER nobody
-
-RUN setlo
