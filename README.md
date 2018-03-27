@@ -43,12 +43,17 @@ and build the container with:
 `docker-compose build`
 
 after build:
-`docker-compose run web bash`
+`docker-compose run --service-ports --rm web bash`
 
 Inside the container run:
 `rails db: create db: migrate db: seed`
 
-db:seed will populate the db with all combination of letters and random gaps
+`db:seed` will populate the db with all combination of letters and random gaps
+
+After all: `rails s`
+
+In docker-compose I'm exporting 3000 port of container to 80!
+You can access on: `localhost`.
 
 ## For lazy people like all oldscholl programmers and I, even I being a noob
 
