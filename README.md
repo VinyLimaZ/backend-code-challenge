@@ -1,6 +1,60 @@
 Ruby Engineer Coding Challenge
 =======================
 
+## What are all this shit?
+
+Hello guys, I'm Vinicius and this is my solution to the problem that you
+brought to me
+
+My solution consists of two endpoints, one is the `POST / distance`, for create
+new routes or update if the route was registered before.
+
+The second endpoint is the `GET /cost? Origin = X & destination = Y & weight = K`, for
+check the value to deliver a package with K kg from X to Y.
+
+On the first part, I created a Service (`DistanceSanitizeService`) to manipulate
+the request raw data and return a hash to create a `Distance`;
+
+On the second part, I created a Service (`CostService`), to find the much
+cheapest route between X and Y returning the cost.
+To find the best route I used the Dijkstra gem, that uses a matrix to
+find the best path, best is: Less kilometer.
+
+On my first attempt to create the project I tried to create an algorithm on my own and
+create the API with only Ruby (without framework), but I would exceed the
+deadline (Like what I'm doing now kkk).
+
+On database I choose the PG because of Heroku.
+
+## Configuration
+
+Ruby version: 2.4.3p250
+Rails version: 5.1.5
+
+## How to
+
+To run install `docker` and` docker-compose` on your machine
+`sudo pacman -Sy docker docker-compose --noconfirm` for Arch and derivates`
+
+and build the container with:
+
+`docker-compose build`
+
+after build:
+
+`docker-compose run web bash`
+
+Inside the container run:
+
+`rails db: create db: migrate db: seed`
+
+## For lazy people like all oldscholl programmers and I, even I being a noob
+
+[https://rakuten-backend-code-challenge.herokuapp.com]
+
+Enjoy and hire me, please (͡ ° ͜ʖ ͡ °)
+
+=================================================
 Hello!
 
 We've come up with this relatively open-ended programming/engineering challenge that will allow you to demonstrate your skills from the comfort of your own workspace. In addition, we know your time is valuable, so please feel free to use your completed work as a portfolio piece.
@@ -62,3 +116,4 @@ That's it. There aren't any hidden gotchas or trick questions. That's really wha
 ## License
 
 We have licensed this project under the MIT license so that you may use this for a portfolio piece (or anything else!).
+
