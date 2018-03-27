@@ -10,8 +10,8 @@ class Cost
                                   message: I18n.t('models.cost.errors.validation.inclusion.weight')
 
   def initialize(params)
-    @origin = params[:origin]
-    @destination = params[:destination]
+    @origin = params[:origin].upcase
+    @destination = params[:destination].upcase
     @weight = params[:weight].to_i
   end
 
