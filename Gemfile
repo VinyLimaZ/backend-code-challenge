@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -8,7 +10,8 @@ end
 gem 'dijkstra', github: 'oscartanner/dijkstra.gem'
 gem 'pg'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2.0.rc2'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -42,3 +45,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+ruby '2.4.3'
