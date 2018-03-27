@@ -1,4 +1,4 @@
-require "dijkstra"
+require 'dijkstra'
 
 class CostService
   attr_reader :origin, :destination, :weight

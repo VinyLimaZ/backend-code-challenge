@@ -12,20 +12,24 @@ describe Distance do
   end
 
   context '#find_or_initialize_by' do
-    let(:distance) { create(:distance, origin: 'A', destination: 'B', gap: 10) }
-    let(:distance_params) { { origin: 'A', destination: 'B', gap: 10 } }
+    let!(:distance) { create(:distance, origin: 'A', destination: 'B', gap: 10) }
+    let(:distance_params) do
+      { origin: 'A', destination: 'B', gap: 10 }.with_indifferent_access
+    end
 
     context 'if find somenthing' do
-      subject { described_class.find_or_initialize_by('a b 10') }
-      it 'return a distance object from database' do
+      subject { described_class.find_or_initialize_by(distance_params) }
+      it 'return a Distance object from database' do
         expect(subject).not_to be_a_new(Distance).with(distance_params)
       end
     end
 
     context 'update gap attribute' do
-      let(:distance_params) { { origin: 'A', destination: 'B', gap: 20 } }
+      let(:distance_params) do
+        { origin: 'A', destination: 'B', gap: 20 }.with_indifferent_access
+      end
 
-      subject { described_class.find_or_initialize_by('a b 20') }
+      subject { described_class.find_or_initialize_by(distance_params) }
 
       it 'update gap attribute' do
         subject.save
@@ -35,8 +39,10 @@ describe Distance do
 
     context '::initialize' do
       context 'if didnt find anything' do
-        let(:distance_params) { { origin: 'A', destination: 'Z', gap: 100 } }
-        subject { described_class.find_or_initialize_by('a z 100') }
+        let(:distance_params) do
+          { origin: 'A', destination: 'Z', gap: 100 }.with_indifferent_access
+        end
+        subject { described_class.find_or_initialize_by(distance_params) }
         it { is_expected.to be_a_new(Distance).with(distance_params) }
       end
     end

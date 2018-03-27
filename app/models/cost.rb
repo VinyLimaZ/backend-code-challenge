@@ -1,13 +1,13 @@
 class Cost
-  include ActiveModel::Callbacks
   include ActiveModel::Validations
+  include ActiveModel::Translation
 
   attr_accessor :origin, :destination, :weight
 
   validate :has_record
   validates_presence_of :origin, :destination, :weight
   validates_inclusion_of :weight, in: (0..50),
-    message: I18n.t('models.cost.errors.validation.inclusion.weight')
+                                  message: I18n.t('models.cost.errors.validation.inclusion.weight')
 
   def initialize(params)
     @origin = params[:origin]
@@ -22,7 +22,7 @@ class Cost
     route_destination = Distance.where(destination: [origin, destination])
 
     if route_origin.blank? || route_destination.blank?
-      errors.add(:base, I18n.t('models.cost.errors.validation.inexistent'))
+      errors.add(:base, I18n.t('models.cost.errors.validation.inexistent_distance'))
     end
   end
 end

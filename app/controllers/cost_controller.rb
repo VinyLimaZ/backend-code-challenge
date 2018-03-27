@@ -5,8 +5,9 @@ class CostController < ApplicationController
       cost = CostService.call(route)
       render json: { status: :ok, cost: cost }
     else
-      render json: { status: :unprocessable_entity,
-                     message: route.errors.full_messages }
+      render json: { status: :invalid,
+                     message: 'route_error',
+                     full_message: route.errors.full_messages }
     end
   end
 
