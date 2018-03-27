@@ -6,7 +6,7 @@ class Cost
 
   validate :has_record
   validates_presence_of :origin, :destination, :weight
-  validates_inclusion_of :weight, in: (0..50),
+  validates_inclusion_of :weight, in: (1..50),
                                   message: I18n.t('models.cost.errors.validation.inclusion.weight')
 
   def initialize(params)
@@ -21,7 +21,7 @@ class Cost
     route_origin = Distance.where(origin: [origin, destination])
     route_destination = Distance.where(destination: [origin, destination])
 
-    if route_origin.blank? || route_destination.blank?
+    if route_origin.blank? && route_destination.blank?
       errors.add(:base, I18n.t('models.cost.errors.validation.inexistent_distance'))
     end
   end
