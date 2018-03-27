@@ -5,7 +5,7 @@ en:
         validation:
           inclusion:
             routes: 'out of pattern! Need to be one letter!'
-            gap: 'out of limit! Need to be more than 0 and less than 100,000'
+            gap: 'out of limit! Need to be more than 1 and less than 100,000'
       messages:
         success:
           created: 'Route created with success!'
@@ -15,4 +15,4 @@ en:
         validation:
           inexistent_distance: 'This route doesnt exist in our Database, you need to register before!'
           inclusion:
-            weight: 'need to be bettewen 0 and 50!'
+            weight: 'need to be bettewen 1 and 50!'
